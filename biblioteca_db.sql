@@ -93,3 +93,22 @@ count(la.la_libro_codigo_fk) as cantidad_libros
 from autores a inner join libro_autor la
 on a.id = la.la_autor_id_fk
 group by a.nombre;
+
+
+--Parte 6: Modificación de la Tabla
+-- Agregar nueva columna precio
+alter table libros
+add column precio double precision;
+
+-- Actualizar precios de 3 libros
+update libros set precio = 15.50
+where codigo = 'L1';
+
+update libros set precio = 20.00
+where codigo = 'L2';
+
+update libros set precio = 35.75
+where codigo = 'L3';
+
+-- Mostrar título y precio
+select titulo,precio from libros;
