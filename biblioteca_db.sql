@@ -57,3 +57,39 @@ values
 ('L3', 2, 1605),
 ('L4', 3, 1997),
 ('L1', 2, 2000);
+
+--Parte 5: Consultas SQL
+-- Consulta 1
+-- Mostrar título, autor, país y año de publicación
+select l.titulo,a.nombre,a.pais,la.anio_publicacion
+from libro_autor la inner join libros l
+on la.la_libro_codigo_fk = l.codigo
+inner join autores a on la.la_autor_id_fk = a.id;
+
+-- Consulta 2
+-- Libros publicados después del 2020
+select l.titulo,la.anio_publicacion
+from libro_autor la inner join libros l
+on la.la_libro_codigo_fk = l.codigo
+where la.anio_publicacion > 2020;
+
+-- Consulta 3
+-- Mostrar autores de un país específico
+select *
+from autores
+where pais = 'Colombia';
+
+-- Consulta 4
+-- Ordenar libros por año de publicación descendente
+select l.titulo,la.anio_publicacion
+from libro_autor la inner join libros l
+on la.la_libro_codigo_fk = l.codigo
+order by la.anio_publicacion desc;
+
+-- Consulta 5
+-- Contar cuántos libros tiene cada autor
+select a.nombre,
+count(la.la_libro_codigo_fk) as cantidad_libros
+from autores a inner join libro_autor la
+on a.id = la.la_autor_id_fk
+group by a.nombre;
